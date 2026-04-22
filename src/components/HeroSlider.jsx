@@ -200,25 +200,25 @@ export default function HeroSlider() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.7, duration: 0.6 }}
-                  className="flex flex-col gap-4 sm:flex-row sm:items-center"
+                  className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4"
                 >
                   <Link
                     to="/contact"
-                    className="group relative flex items-center justify-center gap-3 overflow-hidden rounded-full bg-blc-pink px-8 py-4 text-sm font-bold uppercase tracking-[0.2em] text-white shadow-[0_0_20px_rgba(232,24,90,0.3)] transition-all hover:scale-105 hover:shadow-[0_0_35px_rgba(232,24,90,0.5)] active:scale-95"
+                    className="group relative flex items-center justify-center gap-2 sm:gap-3 overflow-hidden rounded-full bg-blc-pink px-6 sm:px-8 py-3 sm:py-4 text-xs sm:text-sm font-bold uppercase tracking-[0.2em] text-white shadow-[0_0_20px_rgba(232,24,90,0.3)] transition-all hover:scale-105 hover:shadow-[0_0_35px_rgba(232,24,90,0.5)] active:scale-95"
                   >
-                    <CalendarCheck size={18} />
-                    Book a Session
-                    <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
+                    <CalendarCheck size={16} className="sm:h-[18px] sm:w-[18px]" />
+                    <span>Book a Session</span>
+                    <ArrowRight size={14} className="sm:h-4 sm:w-4 transition-transform group-hover:translate-x-1" />
                     {/* Shine effect */}
                     <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-500 group-hover:translate-x-full" />
                   </Link>
 
                   <button
                     onClick={handleFeaturedGames}
-                    className="group flex items-center justify-center gap-3 rounded-full border-2 border-blc-cyan/50 bg-blc-cyan/5 px-8 py-4 text-sm font-bold uppercase tracking-[0.2em] text-blc-cyan backdrop-blur-md transition-all hover:border-blc-cyan hover:bg-blc-cyan/20 hover:scale-105 active:scale-95"
+                    className="group flex items-center justify-center gap-2 sm:gap-3 rounded-full border-2 border-blc-cyan/50 bg-blc-cyan/5 px-6 sm:px-8 py-3 sm:py-4 text-xs sm:text-sm font-bold uppercase tracking-[0.2em] text-blc-cyan backdrop-blur-md transition-all hover:border-blc-cyan hover:bg-blc-cyan/20 hover:scale-105 active:scale-95"
                   >
-                    <Gamepad2 size={18} />
-                    Featured Games
+                    <Gamepad2 size={16} className="sm:h-[18px] sm:w-[18px]" />
+                    <span>Featured Games</span>
                   </button>
                 </motion.div>
               </div>

@@ -25,6 +25,8 @@ export default function FeaturedGamesSlider() {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [direction, setDirection] = useState(0)
   const timerRef = useRef()
+  const touchStartRef = useRef(0)
+  const touchEndRef = useRef(0)
 
   const slideVariants = {
     enter: (d) => ({ x: d > 0 ? 500 : -500, opacity: 0, scale: 0.9 }),
@@ -35,6 +37,32 @@ export default function FeaturedGamesSlider() {
   const paginate = (dir) => {
     setDirection(dir)
     setCurrentIndex((prev) => (prev + dir + games.length) % games.length)
+  }
+
+  const handleTouchStart = (e) => {
+    touchStartRef.current = e.targetTouches[0].clientX
+  }
+
+  const handleTouchEnd = (e) => {
+    touchEndRef.current = e.changedTouches[0].clientX
+    handleSwipe()
+  }
+
+  const handleSwipe = () => {
+    const distance = touchStartRef.current - touchEndRef.current
+    const threshold = 50
+
+    if (Math.abs(distance) > threshold) {
+      if (distance > 0) {
+        // Swiped left, go to next
+        clearInterval(timerRef.current)
+        paginate(1)
+      } else {
+        // Swiped right, go to previous
+        clearInterval(timerRef.current)
+        paginate(-1)
+      }
+    }
   }
 
   useEffect(() => {
@@ -50,83 +78,156 @@ export default function FeaturedGamesSlider() {
         <div className="absolute bottom-0 h-px w-full bg-gradient-to-r from-transparent via-blc-pink to-transparent" />
       </div>
 
-      <div className="container mx-auto px-6 lg:px-8">
-        <div className="mb-16 flex flex-col items-center justify-between gap-6 md:flex-row md:items-end">
-          <div className="text-center md:text-left">
+  return (
+    <section id="featured-games" className="relative overflow-hidden bg-blc-black py-12 sm:py-16 lg:py-20">
+      {/* Background Decor */}
+      <div className="pointer-events-none absolute left-0 top-0 h-full w-full opacity-10">
+        <div className="absolute top-0 h-px w-full bg-gradient-to-r from-transparent via-blc-cyan to-transparent" />
+        <div className="absolute bottom-0 h-px w-full bg-gradient-to-r from-transparent via-blc-pink to-transparent" />
+      </div>
+
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header Section */}
+        <div className="mb-12 sm:mb-16 flex flex-col items-center justify-between gap-6 lg:flex-row lg:items-end">
+          <div className="w-full text-center lg:text-left">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
-              className="mb-4 flex items-center justify-center gap-3 md:justify-start"
+              className="mb-4 flex items-center justify-center gap-3 lg:justify-start"
             >
-              <Stars size={16} className="text-blc-pink" />
-              <span className="font-[Share Tech Mono] text-xs uppercase tracking-[0.4em] text-blc-pink">
+              <Stars size={14} className="sm:h-4 sm:w-4 text-blc-pink" />
+              <span className="font-[Share Tech Mono] text-[10px] sm:text-xs uppercase tracking-[0.4em] text-blc-pink">
                 The Highlight Reel
               </span>
             </motion.div>
-            <h2 className="font-orbitron text-4xl font-black uppercase tracking-tight text-white sm:text-6xl">
+            <h2 className="font-orbitron text-3xl sm:text-4xl lg:text-5xl font-black uppercase tracking-tight text-white">
               Featured <span className="text-blc-cyan">Games</span>
             </h2>
           </div>
           
-          <div className="flex gap-4">
+          {/* Navigation Buttons - Hidden on mobile, visible on lg */}
+          <div className="hidden lg:flex gap-3">
             <button
               onClick={() => { clearInterval(timerRef.current); paginate(-1); }}
-              className="flex h-14 w-14 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-white transition hover:border-blc-pink hover:bg-blc-pink/10 hover:text-blc-pink"
+              className="flex h-12 w-12 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-white transition hover:border-blc-pink hover:bg-blc-pink/10 hover:text-blc-pink active:scale-95"
+              aria-label="Previous game"
+              title="Previous"
             >
-              <ChevronLeft size={24} />
+              <ChevronLeft size={20} />
             </button>
             <button
               onClick={() => { clearInterval(timerRef.current); paginate(1); }}
-              className="flex h-14 w-14 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-white transition hover:border-blc-cyan hover:bg-blc-cyan/10 hover:text-blc-cyan"
+              className="flex h-12 w-12 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-white transition hover:border-blc-cyan hover:bg-blc-cyan/10 hover:text-blc-cyan active:scale-95"
+              aria-label="Next game"
+              title="Next"
             >
-              <ChevronRight size={24} />
+              <ChevronRight size={20} />
             </button>
           </div>
         </div>
 
-        <div className="relative aspect-[16/9] w-full max-w-6xl mx-auto overflow-hidden rounded-[2.5rem] border border-white/5 bg-blc-slate shadow-2xl">
-          <AnimatePresence initial={false} custom={direction}>
-            <motion.div
-              key={currentIndex}
-              custom={direction}
-              variants={slideVariants}
-              initial="enter"
-              animate="center"
-              exit="exit"
-              className="absolute inset-0"
-            >
-              <img
-                src={games[currentIndex].src}
-                alt={games[currentIndex].title}
-                className="h-full w-full object-cover opacity-60"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-blc-black via-blc-black/20 to-transparent" />
-              
-              <div className="absolute bottom-10 left-10 right-10 flex flex-col items-start gap-4">
-                <span className="rounded-full bg-white/10 px-4 py-1.5 font-[Share Tech Mono] text-[10px] uppercase tracking-[0.3em] text-blc-cyan backdrop-blur-md border border-white/10">
-                  {games[currentIndex].tag}
-                </span>
-                <h3 className="font-orbitron text-3xl font-black uppercase text-white sm:text-5xl lg:text-6xl">
-                  {games[currentIndex].title}
-                </h3>
-              </div>
-            </motion.div>
-          </AnimatePresence>
-        </div>
+        {/* Slider Container */}
+        <div className="relative w-full">
+          {/* Main Slider */}
+          <div 
+            className="relative w-full overflow-hidden rounded-2xl sm:rounded-[2rem] border border-white/5 bg-blc-slate shadow-2xl"
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
+          >
+            {/* Responsive aspect ratio */}
+            <div className="relative w-full bg-blc-slate pt-[100%] sm:pt-[66.67%]">
+              <AnimatePresence initial={false} custom={direction}>
+                <motion.div
+                  key={currentIndex}
+                  custom={direction}
+                  variants={slideVariants}
+                  initial="enter"
+                  animate="center"
+                  exit="exit"
+                  className="absolute inset-0"
+                >
+                  <img
+                    src={games[currentIndex].src}
+                    alt={games[currentIndex].title}
+                    className="h-full w-full object-cover opacity-70"
+                  />
+                  {/* Gradient Overlays */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-blc-black via-blc-black/30 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-blc-black/60 via-transparent to-transparent" />
+                  
+                  {/* Content Overlay */}
+                  <div className="absolute inset-0 flex flex-col items-start justify-end p-4 sm:p-6 lg:p-8">
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.1 }}
+                      className="flex items-center gap-2"
+                    >
+                      <span className="rounded-full bg-white/10 px-3 py-1 sm:px-4 sm:py-2 font-[Share Tech Mono] text-[9px] sm:text-[10px] uppercase tracking-[0.3em] text-blc-cyan backdrop-blur-md border border-white/10">
+                        {games[currentIndex].tag}
+                      </span>
+                    </motion.div>
+                    <motion.h3
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.15 }}
+                      className="mt-3 sm:mt-4 font-orbitron text-2xl sm:text-4xl lg:text-5xl font-black uppercase text-white leading-tight"
+                    >
+                      {games[currentIndex].title}
+                    </motion.h3>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+            </div>
 
-        {/* Thumbnail Navigator */}
-        <div className="mt-8 flex justify-center gap-3 overflow-x-auto pb-4 scrollbar-hide">
-          {games.map((game, i) => (
-            <button
-              key={game.id}
-              onClick={() => { clearInterval(timerRef.current); setCurrentIndex(i); }}
-              className={`relative h-2 w-12 flex-shrink-0 rounded-full transition-all duration-500 ${
-                i === currentIndex ? 'bg-blc-cyan w-20' : 'bg-white/10 hover:bg-white/30'
-              }`}
-            />
-          ))}
+            {/* Mobile Navigation Buttons - Visible on mobile, hidden on lg */}
+            <div className="absolute bottom-4 right-4 z-20 flex gap-2 lg:hidden">
+              <button
+                onClick={() => { clearInterval(timerRef.current); paginate(-1); }}
+                className="flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 bg-black/50 text-white transition hover:border-blc-pink hover:bg-blc-pink/20 hover:text-blc-pink active:scale-90"
+                aria-label="Previous game"
+              >
+                <ChevronLeft size={18} />
+              </button>
+              <button
+                onClick={() => { clearInterval(timerRef.current); paginate(1); }}
+                className="flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 bg-black/50 text-white transition hover:border-blc-cyan hover:bg-blc-cyan/20 hover:text-blc-cyan active:scale-90"
+                aria-label="Next game"
+              >
+                <ChevronRight size={18} />
+              </button>
+            </div>
+          </div>
+
+          {/* Thumbnail Navigator - Responsive */}
+          <div className="mt-6 sm:mt-8 flex justify-center gap-2 sm:gap-3 overflow-x-auto pb-3 scrollbar-hide">
+            {games.map((game, i) => (
+              <button
+                key={game.id}
+                onClick={() => { clearInterval(timerRef.current); setCurrentIndex(i); }}
+                className={`relative flex-shrink-0 transition-all duration-500 rounded-lg overflow-hidden border ${
+                  i === currentIndex
+                    ? 'border-blc-cyan bg-blc-cyan/20 h-16 w-20 sm:h-20 sm:w-24 shadow-[0_0_20px_rgba(0,191,255,0.3)]'
+                    : 'border-white/10 bg-white/5 h-14 w-16 sm:h-16 sm:w-20 hover:border-white/30 hover:bg-white/10'
+                }`}
+                title={game.title}
+              >
+                <img
+                  src={game.src}
+                  alt={game.title}
+                  className="h-full w-full object-cover opacity-60"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
+                <span className="absolute bottom-1 left-1 text-[8px] sm:text-[9px] font-bold text-white truncate px-1">
+                  {i + 1}
+                </span>
+              </button>
+            ))}
+          </div>
         </div>
       </div>
+    </section>
+  )
     </section>
   )
 }

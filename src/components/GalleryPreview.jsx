@@ -43,7 +43,7 @@ export default function GalleryPreview() {
             className="font-orbitron text-4xl font-black uppercase text-white sm:text-6xl"
           >
             Visual <span className="text-blc-pink">Experience</span>
-          </h2 >
+          </motion.h2>
         </div>
 
         <div className="grid gap-8 lg:grid-cols-12 lg:items-center">

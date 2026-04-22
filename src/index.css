@@ -46,7 +46,7 @@ html::after {
     linear-gradient(90deg, rgba(232, 244, 248, 0.06) 1px, transparent 1px);
   background-size: 100% 4px, 4px 100%;
   opacity: 0.42;
-  z-index: 9999;
+  z-index: 1;
   mix-blend-mode: overlay;
 }
 

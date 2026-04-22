@@ -72,7 +72,7 @@ export default function ShopSection() {
                 to="/contact"
                 className="group relative flex items-center gap-4 rounded-3xl bg-white px-8 py-6 text-sm font-bold uppercase tracking-widest text-blc-black transition-transform hover:scale-105 active:scale-95"
               >
-                Inquire Price
+                Inquire Now
                 <ChevronRight className="transition-transform group-hover:translate-x-1" />
               </Link>
             </div>

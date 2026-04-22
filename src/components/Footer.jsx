@@ -51,10 +51,10 @@ export default function Footer() {
         >
           {/* Brand Section */}
           <motion.div variants={itemVariants} className="flex flex-col">
-            <Link to="/" className="mb-6 flex w-fit items-center justify-start">
+            <Link to="/" className="mb-6 flex w-fit items-center justify-start" aria-label="BORHZ LEVEL CONTROLZ home">
               <img
                 src={blcLogo}
-                alt="Borhz Level Controlz"
+                alt="Borhz Level Controlz logo"
                 className="h-10 md:h-12 w-auto object-contain opacity-90 transition-opacity duration-200 hover:opacity-100 mix-blend-screen"
               />
             </Link>
@@ -117,12 +117,13 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group flex items-center gap-3 text-sm transition duration-300 hover:text-blc-cyan"
+                aria-label="Contact us on WhatsApp - +234 902 849 5830"
               >
-                <Phone size={16} className="flex-shrink-0 text-blc-pink transition duration-300 group-hover:text-blc-cyan" />
+                <Phone size={16} className="flex-shrink-0 text-blc-pink transition duration-300 group-hover:text-blc-cyan" aria-hidden="true" />
                 <span>+234 902 849 5830</span>
               </a>
               <div className="group flex items-start gap-3 text-sm transition duration-300 hover:text-blc-cyan">
-                <MapPin size={16} className="mt-1 flex-shrink-0 text-blc-pink transition duration-300 group-hover:text-blc-cyan" />
+                <MapPin size={16} className="mt-1 flex-shrink-0 text-blc-pink transition duration-300 group-hover:text-blc-cyan" aria-hidden="true" />
                 <span>Rm 15 Wall Street Plaza Danraka Road opposite A.B.U North gate Samaru Zaria</span>
               </div>
             </div>
@@ -156,9 +157,10 @@ export default function Footer() {
             <Link
               to="/contact"
               className="group inline-flex items-center gap-2 rounded-full border border-blc-pink bg-blc-pink/10 px-6 py-3 font-orbitron text-sm font-semibold uppercase tracking-[0.15em] text-blc-pink transition duration-300 hover:bg-blc-pink hover:text-white"
+              aria-label="Book your experience - Go to contact page"
             >
               Book Experience
-              <ArrowRight size={16} className="transition duration-300 group-hover:translate-x-1" />
+              <ArrowRight size={16} className="transition duration-300 group-hover:translate-x-1" aria-hidden="true" />
             </Link>
           </motion.div>
         </motion.div>

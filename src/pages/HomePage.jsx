@@ -6,7 +6,7 @@ import ShopSection from '../components/ShopSection'
 import FeaturedGamesSlider from '../components/FeaturedGamesSlider'
 import GalleryPreview from '../components/GalleryPreview'
 import CTASection from '../components/CTASection'
-import CyberDivider from '../components/CyberDivider'
+import SectionDivider from '../components/CyberDivider'
 import { useScrollReveal } from '../hooks/useScrollReveal'
 
 export default function HomePage() {
@@ -21,49 +21,49 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen bg-blc-black">
-      <section ref={heroRef.ref} className="opacity-100">
+      <section ref={heroRef.ref} className="opacity-100" aria-label="Hero section">
         <HeroSlider />
       </section>
 
-      <CyberDivider />
+      <SectionDivider />
 
-      <section ref={servicesRef.ref} className={`transition-opacity duration-1000 ${servicesRef.isVisible ? 'opacity-100' : 'opacity-0'}`}>
+      <section ref={servicesRef.ref} id="services" className={`transition-opacity duration-1000 ${servicesRef.isVisible ? 'opacity-100' : 'opacity-0'}`} aria-label="Services section">
         <ServicesSection />
       </section>
 
-      <CyberDivider />
+      <SectionDivider />
 
-      <section ref={experienceRef.ref} className={`transition-opacity duration-1000 ${experienceRef.isVisible ? 'opacity-100' : 'opacity-0'}`}>
+      <section ref={experienceRef.ref} id="experience" className={`transition-opacity duration-1000 ${experienceRef.isVisible ? 'opacity-100' : 'opacity-0'}`} aria-label="Experience section">
         <ExperienceSection />
       </section>
 
-      <CyberDivider />
+      <SectionDivider />
 
-      <section ref={eventsRef.ref} className={`transition-opacity duration-1000 ${eventsRef.isVisible ? 'opacity-100' : 'opacity-0'}`}>
+      <section ref={eventsRef.ref} id="events" className={`transition-opacity duration-1000 ${eventsRef.isVisible ? 'opacity-100' : 'opacity-0'}`} aria-label="Events section">
         <EventsSection />
       </section>
 
-      <CyberDivider />
+      <SectionDivider />
 
-      <section ref={shopRef.ref} className={`transition-opacity duration-1000 ${shopRef.isVisible ? 'opacity-100' : 'opacity-0'}`}>
+      <section ref={shopRef.ref} id="shop" className={`transition-opacity duration-1000 ${shopRef.isVisible ? 'opacity-100' : 'opacity-0'}`} aria-label="Shop section">
         <ShopSection />
       </section>
 
-      <CyberDivider />
+      <SectionDivider />
 
-      <section id="featured-games" ref={gamesRef.ref} className={`transition-opacity duration-1000 ${gamesRef.isVisible ? 'opacity-100' : 'opacity-0'}`}>
+      <section id="featured-games" ref={gamesRef.ref} className={`transition-opacity duration-1000 ${gamesRef.isVisible ? 'opacity-100' : 'opacity-0'}`} aria-label="Featured games section">
         <FeaturedGamesSlider />
       </section>
 
-      <CyberDivider />
+      <SectionDivider />
 
-      <section ref={galleryRef.ref} className={`transition-opacity duration-1000 ${galleryRef.isVisible ? 'opacity-100' : 'opacity-0'}`}>
+      <section ref={galleryRef.ref} id="gallery" className={`transition-opacity duration-1000 ${galleryRef.isVisible ? 'opacity-100' : 'opacity-0'}`} aria-label="Gallery preview section">
         <GalleryPreview />
       </section>
 
-      <CyberDivider />
+      <SectionDivider />
 
-      <section ref={ctaRef.ref} className={`transition-opacity duration-1000 ${ctaRef.isVisible ? 'opacity-100' : 'opacity-0'}`}>
+      <section ref={ctaRef.ref} id="cta" className={`transition-opacity duration-1000 ${ctaRef.isVisible ? 'opacity-100' : 'opacity-0'}`} aria-label="Call to action section">
         <CTASection />
       </section>
     </div>

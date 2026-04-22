@@ -1,11 +1,16 @@
 import { motion, useScroll, useTransform } from 'framer-motion'
 
-export default function CyberDivider() {
+/**
+ * CyberDivider Component
+ * Decorative section divider with animated element
+ * Visually separates content sections with a cyberpunk aesthetic
+ */
+export default function SectionDivider() {
   const { scrollYProgress } = useScroll()
   const rotate = useTransform(scrollYProgress, [0, 1], [0, 360])
 
   return (
-    <div className="relative my-16 flex items-center justify-center">
+    <div className="relative my-8 flex items-center justify-center" role="separator" aria-hidden="true">
       <div className="absolute inset-0 h-px bg-gradient-to-r from-transparent via-blc-cyan to-transparent" />
       <motion.div
         style={{ rotate }}

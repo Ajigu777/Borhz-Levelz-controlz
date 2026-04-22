@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Monitor, Video, Truck, ShoppingBag, Settings, Tool } from 'lucide-react'
+import { Monitor, Video, Truck, ShoppingBag, Settings, Wrench } from 'lucide-react'
 
 const servicesData = [
   {
@@ -40,7 +40,7 @@ const servicesData = [
   {
     label: '06',
     title: 'Rapid Repairs',
-    icon: <Tool size={28} />,
+    icon: <Wrench size={28} />,
     desc: 'Expert technician services for consoles, controllers, and cooling systems.',
     color: 'text-blc-pink'
   },

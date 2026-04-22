@@ -41,10 +41,10 @@ export default function Navbar() {
               animate={{ opacity: 1, x: 0 }}
               className="flex items-center"
             >
-              <Link to="/" className="flex items-center group">
+              <Link to="/" className="flex items-center group" aria-label="BORHZ LEVEL CONTROLZ home">
                 <img
                   src={blcLogo}
-                  alt="Borhz Level Controlz"
+                  alt="Borhz Level Controlz logo"
                   className="h-10 w-auto object-contain transition-all duration-300 group-hover:scale-110 mix-blend-screen"
                 />
               </Link>
@@ -98,16 +98,16 @@ export default function Navbar() {
                 <Link
                   to="/contact"
                   className="group relative flex items-center gap-2 overflow-hidden rounded-full border border-blc-pink bg-blc-pink/10 px-5 py-2 text-[10px] font-bold uppercase tracking-[0.2em] text-blc-pink transition-all hover:bg-blc-pink hover:text-white"
+                  aria-label="Book now - Go to contact page"
                 >
                   Book Now
-                  <ArrowRight size={12} className="transition-transform group-hover:translate-x-1" />
+                  <ArrowRight size={12} className="transition-transform group-hover:translate-x-1" aria-hidden="true" />
                 </Link>
               </motion.div>
 
               {/* Mobile Menu Button */}
               <div className="flex md:hidden">
-                <Disclosure.Button className="inline-flex items-center justify-center rounded-full bg-white/5 p-2 text-white outline-none transition hover:bg-white/10 active:scale-95">
-                  <span className="sr-only">Open main menu</span>
+                <Disclosure.Button className="inline-flex items-center justify-center rounded-full bg-white/5 p-2 text-white outline-none transition hover:bg-white/10 active:scale-95" aria-label={open ? "Close navigation menu" : "Open navigation menu"}>
                   {open ? (
                     <X className="block h-6 w-6" aria-hidden="true" />
                   ) : (
@@ -149,9 +149,10 @@ export default function Navbar() {
                     <Link
                       to="/contact"
                       className="flex w-full items-center justify-center gap-2 rounded-xl bg-blc-pink px-4 py-4 text-xs font-bold uppercase tracking-[0.2em] text-white"
+                      aria-label="Book your experience - Go to contact page"
                     >
                       Book Your Experience
-                      <ArrowRight size={14} />
+                      <ArrowRight size={14} aria-hidden="true" />
                     </Link>
                   </div>
                 </div>
