@@ -1,0 +1,6 @@
+export const HOME = '/'
+export const GALLERY = '/gallery'
+export const GALLERY_DETAIL = '/gallery/:id'
+export const SERVICES = '/services'
+export const EVENTS = '/events'
+export const CONTACT = '/contact'
