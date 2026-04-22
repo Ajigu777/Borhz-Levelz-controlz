@@ -1,7 +1,7 @@
 import { useMemo, useState, useCallback, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useParams, useNavigate } from 'react-router-dom'
-import img1 from '../assets/image one.JPG'
+import img1 from '../assets/image 1.JPG'
 import img2 from '../assets/image 2.JPG'
 import img3 from '../assets/image 3.JPG'
 import vid1 from '../assets/video 1.mp4'
